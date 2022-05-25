@@ -5,24 +5,32 @@ using UnityEngine.UI;
 
 public class CanvasController : MonoBehaviour
 {
-
+    public static CanvasController instance;
     [SerializeField] Slider hp;
     [SerializeField] Text txtLevel;
     [SerializeField] Text txtScore;
+    private void Awake()
+    {
+        instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
         hp.maxValue = GameController.instance.MaxHp;
+        hp.value = float.MaxValue;
         txtLevel.text = "Level: " + Prefs.SceneLevel.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void CheckHP()
     {
-        CheckHighScore();
         hp.value = GameController.instance.Hp;
+        if (hp.value == 0)
+        {
+            PlayerController.instance.AniDie();
+        }
     }
-    void CheckHighScore()
+    public void CheckScore()
     {
         if (Prefs.HighScore < GameController.instance.Score + Prefs.SumScore)
         {
@@ -45,6 +53,10 @@ public class CanvasController : MonoBehaviour
     {
         PlayerController.instance.isMoveUp = true;
     }
+    public void Fire()
+    {
+        PlayerController.instance.isFire = true;
+    }
 
     public void UnmoveLeft()
     {
@@ -57,5 +69,9 @@ public class CanvasController : MonoBehaviour
     public void UnmoveUp()
     {
         PlayerController.instance.isMoveUp = false;
+    }
+    public void UnFire()
+    {
+        PlayerController.instance.isFire = false;
     }
 }

@@ -18,6 +18,12 @@ EditorBuildSettings:
     path: Assets/1MARIO/_Scenes/Level 3.unity
     guid: 17874505e5500634488ae947a5669528
   - enabled: 1
+    path: Assets/1MARIO/_Scenes/Level 4.unity
+    guid: 24f4914370935fd48935103c6ed300f5
+  - enabled: 1
+    path: Assets/1MARIO/_Scenes/Level 5.unity
+    guid: 41f8ce3f86431c64799965b4693dafd3
+  - enabled: 1
     path: Assets/1MARIO/_Scenes/Level 6.unity
     guid: 4d9d7bc195192b948afb3b971912d9ff
   - enabled: 1
@@ -29,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/1MARIO/_Scenes/Level 9.unity
     guid: b2793ceb3f1c05744ac0407e2d6bb000
+  - enabled: 1
+    path: Assets/1MARIO/_Scenes/Level 10.unity
+    guid: b18fd7bd7797cbf439521058530e11e2
   m_configObjects: {}

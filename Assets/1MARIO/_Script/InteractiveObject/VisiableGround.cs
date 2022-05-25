@@ -20,7 +20,7 @@ public class VisiableGround : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Player")
+        if (collision.collider.CompareTag("Player"))
         {
             objFalse.SetActive(false);
             effect.transform.position = transform.position;

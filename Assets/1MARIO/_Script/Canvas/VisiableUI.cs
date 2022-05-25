@@ -27,7 +27,12 @@ public class VisiableUI : MonoBehaviour
         LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void Remuse()
+    public void SelectTimeScale(float time)
+    {
+        Time.timeScale = time;
+    }
+
+    public void Resume()
     {
         SceneManager.LoadScene(Prefs.SceneLevel);
     }

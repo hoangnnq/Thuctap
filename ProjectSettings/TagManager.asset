@@ -11,6 +11,9 @@ TagManager:
   - Thorn
   - EnemyNotDestroy
   - Enemy
+  - Medicine
+  - Bullet
+  - ChangeDir
   layers:
   - Default
   - TransparentFX
@@ -18,11 +21,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - ground
   - 
   - 
   - Enemy
-  - 
+  - Tree
   - 
   - 
   - 

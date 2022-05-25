@@ -18,7 +18,7 @@ public class MoveWithPlayer : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Player")
+        if (collision.collider.CompareTag("Player"))
         {
             cha = collision.transform.parent;
             collision.transform.SetParent(transform);
@@ -27,7 +27,7 @@ public class MoveWithPlayer : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Player")
+        if (collision.collider.CompareTag("Player"))
         {
             collision.transform.SetParent(cha);
         }

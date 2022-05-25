@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 2473281365828905442}
   - component: {fileID: 2473281365828905441}
   - component: {fileID: 2473281365828905440}
-  - component: {fileID: 2473281365828905439}
-  - component: {fileID: 2473281365828905438}
+  - component: {fileID: 821943715746529091}
+  - component: {fileID: 7014851313331664972}
+  - component: {fileID: -8492240753230789870}
   m_Layer: 9
   m_Name: Murshroom
   m_TagString: Enemy
@@ -104,8 +105,8 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!60 &2473281365828905439
-PolygonCollider2D:
+--- !u!61 &821943715746529091
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -113,29 +114,45 @@ PolygonCollider2D:
   m_GameObject: {fileID: 2473281365828905437}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 43b5732858769374d9b5b09531490046, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.03395748, y: -0.0067911744}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.625, y: 1.25}
+    oldSize: {x: 1.3, y: 1}
     newSize: {x: 1.3, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.58588165, y: 0.631587}
-      - {x: -0.7915186, y: 0.2466678}
-      - {x: -0.41297555, y: -0.61134243}
-      - {x: 0.3892672, y: -0.61134243}
-      - {x: 0.80495304, y: 0.20617849}
-      - {x: 0.5048651, y: 0.631587}
---- !u!114 &2473281365828905438
+  serializedVersion: 2
+  m_Size: {x: 1.3669338, y: 1.0462633}
+  m_EdgeRadius: 0
+--- !u!50 &7014851313331664972
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2473281365828905437}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &-8492240753230789870
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,11 +161,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2473281365828905437}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34638e9e07093384babc07ce0c47249c, type: 3}
+  m_Script: {fileID: 11500000, guid: 837e50aeec6247d4785283de1dd1843a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  TimeChangePos: 1
-  PosLimit: 2
-  strAniDie: Mushroom-die Animation
+  eSpeed: 0
+  eCanMove: 0
+  eVertical: 0
+  strAniDie: 
+  speed: 4
   canMove: 1
+  vertical: 0
+  strAniDieOther: Mushroom-die Animation

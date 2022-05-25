@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 1374958137265409936}
   - component: {fileID: 1374958137265410159}
   - component: {fileID: 1374958137265410158}
-  - component: {fileID: 7660993691869280911}
-  - component: {fileID: 7825073756019155032}
   - component: {fileID: 1667822226285467206}
+  - component: {fileID: 7825073756019155032}
+  - component: {fileID: -7234593466293955135}
+  - component: {fileID: 8082620188613626294}
   m_Layer: 9
   m_Name: LuoiCua
   m_TagString: EnemyNotDestroy
@@ -105,23 +106,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7660993691869280911
-MonoBehaviour:
+--- !u!58 &1667822226285467206
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1374958137265410157}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34638e9e07093384babc07ce0c47249c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  TimeChangePos: 1
-  PosLimit: 0
-  strAniDie: 
-  canMove: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.95
 --- !u!114 &7825073756019155032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,19 +229,42 @@ MonoBehaviour:
   optionalRotationMode: 0
   optionalScrambleMode: 0
   optionalString: 
---- !u!58 &1667822226285467206
-CircleCollider2D:
+--- !u!50 &-7234593466293955135
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374958137265410157}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &8082620188613626294
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1374958137265410157}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.95
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9abd1ab884cd5f42a881c896267c839, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eSpeed: 0
+  eCanMove: 0
+  eVertical: 0
+  speed: 2
+  canMove: 1
+  vertical: 0

@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
     [SerializeField] List<GameObject> ListPlayer;
 
     public GameObject Player;
-    public int MaxHp = 10;
+    public int MaxHp = 1;
     public int Hp ;
 
     public int Score = 0;

@@ -6,15 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
-    [SerializeField] GameObject objResume;
+    public GameObject objResume;
+    public Text highScore;
     // Start is called before the first frame update
     void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
     {
         if (Prefs.SceneLevel != 0)
         {
@@ -23,7 +18,14 @@ public class MenuController : MonoBehaviour
         else if (objResume.activeInHierarchy)
         {
             objResume.SetActive(false);
-        } 
+        }
+        highScore.text = "High Score : " + Prefs.HighScore.ToString();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
     }
 
 }

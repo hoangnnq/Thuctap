@@ -2,22 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
 
-    [SerializeField] float speed = 5;
-    [SerializeField] float jumpheight = 20;
-    [SerializeField] RuntimeAnimatorController jumpAni, dieAni;
-    RuntimeAnimatorController idlerunAni;
-    bool faceright = true;
+    public float speed = 5;
+    public float jumpHeight = 20;
+    public GameObject bullet;
+    public RuntimeAnimatorController jumpAni, dieAni;
+    public bool isMoveLeft, isMoveRight, isMoveUp, isFire;
+
+
+    RuntimeAnimatorController idleRunAni;
     Rigidbody2D myRigid;
     Animator myAni;
     Collider2D myColli;
+    SpriteRenderer mySpire;
     bool grounded = true;
-    float timenow;
-    public bool isMoveLeft, isMoveRight, isMoveUp;
+    float thornCounter;
+    public LayerMask groundLayer;
 
     private void Awake()
     {
@@ -27,34 +32,47 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myRigid = this.GetComponent<Rigidbody2D>();
-        myAni = this.GetComponent<Animator>();
-        myColli = this.GetComponent<Collider2D>();
-        idlerunAni = myAni.runtimeAnimatorController;
-        timenow = GameController.instance.TimeDesHp;
+        myRigid = GetComponent<Rigidbody2D>();
+        myAni = GetComponent<Animator>();
+        myColli = GetComponent<Collider2D>();
+        mySpire = GetComponent<SpriteRenderer>();
+
+        idleRunAni = myAni.runtimeAnimatorController;
     }
 
     void FixedUpdate()
     {
-        if (GameController.instance.Hp == 0)
+        if(GameController.instance.Hp == 0)
         {
-            myAni.runtimeAnimatorController = dieAni;
-            StartCoroutine(ChangeAniDie(1.5f));
             return;
         }
-        if (GameController.instance.TimeDesHp > timenow)
+        if (isCollisionThorn)
         {
-            timenow += Time.deltaTime;
+            thornCounter -= Time.fixedDeltaTime;
+            if(thornCounter <= 0)
+            {
+                GameController.instance.Hp--;
+                CanvasController.instance.CheckHP();
+                thornCounter = GameController.instance.TimeDesHp;
+            }
         }
 
         Move();
 
-        ChekckHit(transform.position);
+        CheckHit(transform.position);
 
         Jump();
 
         Fire();
     }
+
+    public void AniDie()
+    {
+        myAni.runtimeAnimatorController = dieAni;
+        StartCoroutine(ChangeAniDie(1.5f));
+        return;
+    }
+
 
     IEnumerator ChangeAniDie(float time)
     {
@@ -64,44 +82,33 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    void ChekckHit(Vector2 pos)
+    void CheckHit(Vector2 pos)
     {
-        RaycastHit2D[] hits = new RaycastHit2D[4];
-        myColli.Cast(Vector2.down, hits, 0.3f);
-        foreach (RaycastHit2D hit in hits)
+        var hit = Physics2D.BoxCast(transform.position, new Vector2(0.4f, 0.1f), 0, Vector2.zero, 1, groundLayer);
+        if(hit.collider != null)
         {
-            if (hit.collider == null)
-            {
-                continue;
-            }
-            else
-            {
-                grounded = true;
-                myAni.runtimeAnimatorController = idlerunAni;
-                if (hit.collider.tag == "Thorn" && timenow >= GameController.instance.TimeDesHp)
-                {
-                    timenow = 0;
-                    GameController.instance.Hp--;
-                }
-                return;
-            }
-        }
-        myAni.runtimeAnimatorController = jumpAni;
-        if (myRigid.velocity.y > 0)
-        {
-            myAni.SetBool("isup", true);
+            grounded = true;
+            myAni.runtimeAnimatorController = idleRunAni;
         }
         else
         {
-            myAni.SetBool("isup", false);
+            grounded = false;
+            myAni.runtimeAnimatorController = jumpAni;
+            if (myRigid.velocity.y > 0)
+            {
+                myAni.SetBool("isup", true);
+            }
+            else
+            {
+                myAni.SetBool("isup", false);
+            }
         }
-
     }
 
     void Move()
     {
         float move = 0;
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetAxis("Horizontal") != 0)
         {
             move = Input.GetAxis("Horizontal");
         }
@@ -117,12 +124,12 @@ public class PlayerController : MonoBehaviour
             }
         }
         myRigid.velocity = new Vector2(move * speed, myRigid.velocity.y);
-        if (myAni.runtimeAnimatorController == idlerunAni)
+        if (myAni.runtimeAnimatorController == idleRunAni)
         {
             myAni.SetFloat("speed", Mathf.Abs(move));
         }
 
-        if (move > 0 && !faceright || move < 0 && faceright)
+        if (move > 0 && mySpire.flipX || move < 0 && !mySpire.flipX)
         {
             flip();
         }
@@ -130,43 +137,82 @@ public class PlayerController : MonoBehaviour
 
     void flip()
     {
-        faceright = !faceright;
-        this.transform.localScale *= new Vector2(-1, 1);
+        mySpire.flipX = !mySpire.flipX;
     }
 
     void Jump()
     {
         if ((Input.GetAxisRaw("Vertical") == 1 || isMoveUp) && grounded == true)
         {
-            myRigid.velocity = new Vector2(myRigid.velocity.x, jumpheight);
+            myRigid.velocity = new Vector2(myRigid.velocity.x, jumpHeight);
             myAni.runtimeAnimatorController = jumpAni;
-            grounded = false;
         }
     }
 
     void Fire()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space) || isFire)
         {
+            Debug.Log("fire"); 
+            Vector2 posBullet = new Vector2(transform.position.x, transform.position.y + myColli.bounds.size.y);
             //ra dan + hieu ung
-
+            if (mySpire.flipX)
+            {
+                posBullet = new Vector2(transform.position.x - myColli.bounds.size.x, posBullet.y);
+            }
+            else
+            {
+                posBullet = new Vector2(transform.position.x + myColli.bounds.size.x, posBullet.y);
+            }
+            Instantiate(bullet, posBullet, Quaternion.identity);
         }
     }
 
+    bool isCollisionThorn;
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Brick" && collision.transform.position.y > transform.position.y)
+        if (collision.collider.CompareTag("Thorn"))
         {
-            collision.gameObject.SetActive(false);
-
+            isCollisionThorn = true;
+            thornCounter = GameController.instance.TimeDesHp;
+        }
+        if (transform.localScale.x > 1 && collision.collider.CompareTag("Brick") && 
+            collision.transform.position.y > transform.position.y + myColli.bounds.size.y)
+        {
+            //hieu ung no gach
+            collision.gameObject.GetComponent<ParticleSystem>().Play(true);
+            //collision.gameObject.SetActive(false);
+            StartCoroutine(EffectBrick(collision.gameObject, 0.2f));
         }
     }
+    IEnumerator EffectBrick(GameObject obj, float time)
+    {
+        yield return new WaitForSeconds(time);
+        obj.SetActive(false);
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Thorn"))
+        {
+            isCollisionThorn = false;
+        }
+    }
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Coin")
+        if (collision.gameObject.CompareTag("Coin"))
         {
+            grounded = false;
             GameController.instance.Score++;
+            CanvasController.instance.CheckScore();
+            collision.gameObject.SetActive(false);
+        }
+
+        if (collision.gameObject.CompareTag("Medicine") && transform.localScale.x < 2)
+        {
+            transform.DOScale(new Vector3(1.5f, 1.5f, 1), 1);
             collision.gameObject.SetActive(false);
         }
     }

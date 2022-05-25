@@ -41,10 +41,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 4646808906877187174}
     m_Modifications:
     - target: {fileID: 6664821867931481606, guid: 6aef07646fd318a4da438b57160601db, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6664821867931481606, guid: 6aef07646fd318a4da438b57160601db, type: 3}
       propertyPath: m_Name
       value: PlayerBlue
       objectReference: {fileID: 0}
@@ -52,34 +48,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6664821867931481609, guid: 6aef07646fd318a4da438b57160601db, type: 3}
-      propertyPath: m_Size.x
-      value: 0.942955
-      objectReference: {fileID: 0}
-    - target: {fileID: 6664821867931481609, guid: 6aef07646fd318a4da438b57160601db, type: 3}
-      propertyPath: m_Size.y
-      value: 1.2141136
-      objectReference: {fileID: 0}
-    - target: {fileID: 6664821867931481609, guid: 6aef07646fd318a4da438b57160601db, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.016666412
-      objectReference: {fileID: 0}
-    - target: {fileID: 6664821867931481609, guid: 6aef07646fd318a4da438b57160601db, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.012314141
-      objectReference: {fileID: 0}
-    - target: {fileID: 6664821867931481611, guid: 6aef07646fd318a4da438b57160601db, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 8458f6bf6855106478aea5115d0c2073, type: 2}
     - target: {fileID: 6664821867931481612, guid: 6aef07646fd318a4da438b57160601db, type: 3}
-      propertyPath: dieAni
-      value: 
-      objectReference: {fileID: 9100000, guid: 9bf449894f7f7dd4c8302035786e6afc, type: 2}
-    - target: {fileID: 6664821867931481612, guid: 6aef07646fd318a4da438b57160601db, type: 3}
-      propertyPath: jumpAni
-      value: 
-      objectReference: {fileID: 9100000, guid: f952d041e098fad478cd16d41e2ea4a9, type: 2}
+      propertyPath: groundLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 6664821867931481613, guid: 6aef07646fd318a4da438b57160601db, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -146,10 +118,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6664821867931481611, guid: 6a26df922f65b514ca704546ebb3e1e1, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 594d06ba83404df43bea0386571e8d7e, type: 2}
+    - target: {fileID: 6664821867931481612, guid: 6a26df922f65b514ca704546ebb3e1e1, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 6664821867931481613, guid: 6a26df922f65b514ca704546ebb3e1e1, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -217,8 +189,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6664821867931481612, guid: e9c6a486434ffcf4099b9a12328801aa, type: 3}
-      propertyPath: jumpheight
-      value: 10
+      propertyPath: groundLayer.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 6664821867931481613, guid: e9c6a486434ffcf4099b9a12328801aa, type: 3}
       propertyPath: m_RootOrder

@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6664821867931481606}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6367560908665664636, guid: 40de9a8703e2e5a47882b0b86451c741, type: 3}
+  m_Sprite: {fileID: -1363835404106015672, guid: 40de9a8703e2e5a47882b0b86451c741, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -139,8 +139,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.016666412, y: -0.00838387}
-  m_Size: {x: 0.942955, y: 1.1230423}
+  m_Offset: {x: 0, y: 0.625}
+  m_Size: {x: 1.1, y: 1.25}
   m_Direction: 0
 --- !u!114 &6664821867931481612
 MonoBehaviour:
@@ -155,9 +155,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpheight: 20
+  jumpHeight: 20
+  bullet: {fileID: 7412380243299584896, guid: 4d798a6a44d594f429644ba3089bf0c0, type: 3}
   jumpAni: {fileID: 9100000, guid: f952d041e098fad478cd16d41e2ea4a9, type: 2}
   dieAni: {fileID: 9100000, guid: 9bf449894f7f7dd4c8302035786e6afc, type: 2}
   isMoveLeft: 0
   isMoveRight: 0
   isMoveUp: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
