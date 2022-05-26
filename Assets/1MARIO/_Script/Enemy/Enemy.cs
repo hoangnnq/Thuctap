@@ -10,13 +10,6 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public bool eVertical;
 
 
-    //public Enemy(float speed, bool canMove, bool isVertical, int dmg)
-    //{
-    //    eSpeed = speed;
-    //    eCanMove = canMove;
-    //    eVertical = isVertical;
-    //    eDamage = dmg;
-    //}
 
     public void ChangeDir(Collider2D collision, Rigidbody2D myRigid, Transform myTranf)
     {

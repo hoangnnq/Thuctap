@@ -8,9 +8,6 @@ public class InanimateEnemy : Enemy
     public bool canMove = true;
     public bool vertical;
     Rigidbody2D myRigid;
-    //public InanimateEnemy(float speed, bool canMove, bool isVertical, int dmg) : base(speed, canMove, isVertical, dmg)
-    //{
-    //}
 
     private void Start()
     {

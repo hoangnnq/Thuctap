@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class VisiableGround : MonoBehaviour
 {
-    [SerializeField] GameObject objFalse;
-    [SerializeField] GameObject effect;
+    public GameObject objFalse;
+    public GameObject effect;
     // Start is called before the first frame update
     void Start()
     {

@@ -11,9 +11,6 @@ public class OtherEnemy : AnimalEnemy
     Rigidbody2D myRigid;
     Animator myAni;
 
-    //public OtherEnemy(float speed, bool canMove, bool isVertical, int dmg, string strAniDieOther) : base(speed, canMove, isVertical, dmg, strAniDieOther)
-    //{
-    //}
 
     private void Start()
     {
@@ -29,20 +26,33 @@ public class OtherEnemy : AnimalEnemy
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.collider.CompareTag("Player"))
+        if (collision.collider.CompareTag("Bullet"))
         {
-            return;
+            EnemyDie(collision.gameObject);
         }
-        ChangeDir(collision.collider, myRigid, transform);
-        if (collision.transform.position.y > transform.position.y || collision.collider.CompareTag("Bullet"))
+        if (collision.collider.CompareTag("Player"))
         {
-            PlayAniDie(myAni);
-            Invoke("ObjActive", 0.3f);
+            ChangeDir(collision.collider, myRigid, transform);
+            if (collision.transform.position.y > transform.position.y)
+            {
+                EnemyDie();
+            }
+            else
+            {
+                base.PlayerCollisionEnter(collision);
+            }
         }
-        else
+    }
+
+    void EnemyDie(GameObject obj = null)
+    {
+        if (obj != null)
         {
-            base.PlayerCollisionEnter(collision);
+            obj.SetActive(false);
         }
+        PlayAniDie(myAni);
+        DG.Tweening.DOVirtual.DelayedCall(0.3f, ObjActive);
+        //=Invoke("ObjActive", 0.3f);
     }
 
     void ObjActive()

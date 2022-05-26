@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2448361359828690633}
   - component: {fileID: -7276764422937611364}
   - component: {fileID: -4453941918603623528}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: OcSen
   m_TagString: Enemy
   m_Icon: {fileID: 0}

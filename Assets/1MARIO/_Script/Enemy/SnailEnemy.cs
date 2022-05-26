@@ -12,6 +12,8 @@ public class SnailEnemy : AnimalEnemy
 
     Rigidbody2D myRigid;
     Animator myAni;
+    float timeComeOut = 4;
+    float speedBeforeDef;
 
     //public SnailEnemy(float speed, bool canMove, bool isVertical, int dmg, string strAniDieSnail, string strAniDef) : base(speed, canMove, isVertical, dmg, strAniDieSnail)
     //{
@@ -32,34 +34,56 @@ public class SnailEnemy : AnimalEnemy
         Move(myRigid);
     }
 
+    private void Update()
+    {
+        timeComeOut -= Time.deltaTime;
+        if (timeComeOut <= 0 && myAni.GetBool("isDef")) 
+        {
+            myAni.SetBool("isDef", false);
+            eSpeed = speedBeforeDef;
+            Move(myRigid);
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (collision.collider.CompareTag("Bullet"))
+        {
+            collision.gameObject.SetActive(false);
+            PlayAniDie(myAni);
+            Invoke("ObjActive", 0.3f);
+        }
+        if (!collision.collider.CompareTag("Player"))
+        {
+            return;
+        }
+        if (!myAni.GetBool("isDef"))
         {
             if (collision.transform.position.y > transform.position.y)
             {
                 myAni.SetBool("isDef", true);
-                eSpeed *= 2f;
+                speedBeforeDef = eSpeed;
+                eSpeed = 0;
                 Move(myRigid);
-                Invoke("ObjRun", 4);
             }
             else
             {
                 PlayerCollisionEnter(collision);
             }
         }
-        if (collision.collider.CompareTag("Bullet"))
+        else
         {
-            PlayAniDie(myAni);
-            Invoke("ObjActive", 0.3f);
+            if (collision.transform.position.x > transform.position.x )
+            {
+                eSpeed = -speed * 2;
+            }
+            else
+            {
+                eSpeed = speed * 2;
+            }
+            Move(myRigid); 
+            PlayerCollisionEnter(collision);
         }
-    }
-
-    void ObjRun()
-    {
-        myAni.SetBool("isDef", false);
-        eSpeed /= 2f;
-        Move(myRigid);
+        timeComeOut = 4;
     }
 
     void ObjActive()
@@ -75,6 +99,7 @@ public class SnailEnemy : AnimalEnemy
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        speedBeforeDef = -speedBeforeDef;
         ChangeDir(collision, myRigid,transform);
     }
 }

@@ -46,3 +46,8 @@ MonoBehaviour:
   hp: {fileID: 0}
   txtLevel: {fileID: 0}
   txtScore: {fileID: 0}
+  Notify: {fileID: 0}
+  txtDieYourScore: {fileID: 0}
+  txtNotify: {fileID: 0}
+  CompleteLv: {fileID: 0}
+  btnNext: {fileID: 0}

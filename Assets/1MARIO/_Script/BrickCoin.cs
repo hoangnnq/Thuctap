@@ -5,10 +5,10 @@ using DG.Tweening;
 
 public class BrickCoin : MonoBehaviour
 {
-    [SerializeField] GameObject popup;
-    [SerializeField] GameObject coin;
-    [SerializeField] int quantitymax = 1;
-    [SerializeField] bool isVisiable = false;
+    public GameObject popup;
+    public GameObject coin;
+    public int quantitymax = 1;
+    public bool isCherry = false;
     List<GameObject> coins = new List<GameObject>();
     int number = 0;
     Vector2 poscoin;
@@ -32,7 +32,7 @@ public class BrickCoin : MonoBehaviour
             {
                 popup.SetActive(false);
             }
-            if (isVisiable)
+            if (isCherry)
             {
                 GameObject cherry = Instantiate(coin, poscoin, Quaternion.identity);
                 cherry.transform.DOMoveY(poscoin.y + 1, 4).SetSpeedBased();

@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public bool isMoveLeft, isMoveRight, isMoveUp, isFire;
 
 
+    List<GameObject> lstBullet = new List<GameObject>();
     RuntimeAnimatorController idleRunAni;
     Rigidbody2D myRigid;
     Animator myAni;
@@ -79,7 +80,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(time);
         this.gameObject.SetActive(false);
         GameController.instance.Score = 0;
-        SceneManager.LoadScene(0);
     }
 
     void CheckHit(Vector2 pos)
@@ -151,9 +151,9 @@ public class PlayerController : MonoBehaviour
 
     void Fire()
     {
-        if (Input.GetKeyUp(KeyCode.Space) || isFire)
+        if (Input.GetKeyDown(KeyCode.Space) || isFire)
         {
-            Debug.Log("fire"); 
+            isFire = false;
             Vector2 posBullet = new Vector2(transform.position.x, transform.position.y + myColli.bounds.size.y);
             //ra dan + hieu ung
             if (mySpire.flipX)
@@ -164,8 +164,32 @@ public class PlayerController : MonoBehaviour
             {
                 posBullet = new Vector2(transform.position.x + myColli.bounds.size.x, posBullet.y);
             }
-            Instantiate(bullet, posBullet, Quaternion.identity);
+            bool chk = false;
+            foreach (GameObject item in lstBullet)
+            {
+                if (item.activeInHierarchy)
+                {
+                    continue;
+                }
+                item.transform.position = posBullet;
+                item.SetActive(true);
+                chk = true;
+                StartCoroutine(EnableBullet(item, 3));
+                break;
+            }
+            if (!chk)
+            {
+                GameObject b = Instantiate(bullet, posBullet, Quaternion.identity);
+                lstBullet.Add(b);
+                StartCoroutine(EnableBullet(b, 3));
+            }
         }
+    }
+
+    IEnumerator EnableBullet(GameObject obj, float time)
+    {
+        yield return new WaitForSeconds(time);
+        obj.SetActive(false);
     }
 
     bool isCollisionThorn;
@@ -190,6 +214,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(time);
         obj.SetActive(false);
     }
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Thorn"))

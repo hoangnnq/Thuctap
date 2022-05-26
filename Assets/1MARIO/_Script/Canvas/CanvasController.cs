@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CanvasController : MonoBehaviour
 {
     public static CanvasController instance;
-    [SerializeField] Slider hp;
-    [SerializeField] Text txtLevel;
-    [SerializeField] Text txtScore;
+    public Slider hp;
+    public Text txtLevel;
+    public Text txtScore;
+    public GameObject Notify;
+    public Text txtDieYourScore;
+    public Text txtNotify;
+    public GameObject CompleteLv;
+    public Button btnNext;
     private void Awake()
     {
         instance = this;
@@ -19,6 +25,7 @@ public class CanvasController : MonoBehaviour
         hp.maxValue = GameController.instance.MaxHp;
         hp.value = float.MaxValue;
         txtLevel.text = "Level: " + Prefs.SceneLevel.ToString();
+        txtScore.text = "Score: " + Prefs.SumScore.ToString();
     }
 
 
@@ -28,8 +35,30 @@ public class CanvasController : MonoBehaviour
         if (hp.value == 0)
         {
             PlayerController.instance.AniDie();
+            txtDieYourScore.text = "Your Score: " + (GameController.instance.Score + Prefs.SumScore);
+            txtNotify.text = "You are die!";
+            Notify.SetActive(true);
         }
     }
+
+    public void VisiableCompleteLv()
+    {
+        CompleteLv.SetActive(true);
+        btnNext.onClick.AddListener(NextLv); 
+    }
+
+    void NextLv()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void win()
+    {
+        Notify.SetActive(true);
+        txtDieYourScore.text = "Your Score: " + Prefs.SumScore;
+        txtNotify.text = "You are win!";
+    }
+
     public void CheckScore()
     {
         if (Prefs.HighScore < GameController.instance.Score + Prefs.SumScore)

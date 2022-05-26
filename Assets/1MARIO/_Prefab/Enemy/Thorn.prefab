@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9026602372944280910}
   - component: {fileID: 9026602372944280911}
-  - component: {fileID: 9026602372944280904}
-  m_Layer: 9
+  - component: {fileID: 2575934530045654705}
+  m_Layer: 6
   m_Name: Thorn
   m_TagString: Thorn
   m_Icon: {fileID: 0}
@@ -83,8 +83,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &9026602372944280904
-PolygonCollider2D:
+--- !u!61 &2575934530045654705
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -96,7 +96,7 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.022447348, y: -0.7482478}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -106,29 +106,6 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.50240135, y: -0.16363215}
-      - {x: 0.33461237, y: -0.34255826}
-      - {x: 0.3275447, y: -0.6526996}
-      - {x: 0.16865063, y: -0.6541654}
-      - {x: 0.14257383, y: -0.93917453}
-      - {x: -0.059942245, y: -0.99753726}
-      - {x: -0.29240608, y: -0.98012936}
-      - {x: -0.31004095, y: -0.6587652}
-      - {x: -0.47035313, y: -0.64980924}
-      - {x: -0.50163174, y: -0.32383525}
-      - {x: -0.6470828, y: -0.16075957}
-      - {x: -0.8276881, y: -0.16075297}
-      - {x: -1.0059131, y: -0.34731203}
-      - {x: -1.0007167, y: -0.63740885}
-      - {x: -1.1724987, y: -0.6743587}
-      - {x: -1.1861391, y: -0.97173274}
-      - {x: -1.3413429, y: -0.99612653}
-      - {x: -1.3333334, y: -1.3333334}
-      - {x: 1.1728004, y: -1.3209847}
-      - {x: 1.1618476, y: -0.99725425}
-      - {x: 1.0020847, y: -0.667395}
-      - {x: 0.8479686, y: -0.6408926}
-      - {x: 0.8217429, y: -0.32605827}
-      - {x: 0.66609704, y: -0.16357179}
+  serializedVersion: 2
+  m_Size: {x: 2.6217723, y: 1.1701714}
+  m_EdgeRadius: 0

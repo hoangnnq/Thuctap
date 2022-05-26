@@ -221,4 +221,4 @@ MonoBehaviour:
   popup: {fileID: 3295074800427086938}
   coin: {fileID: 7772340980117034810, guid: a818cd16d0aa2fc4fb76e2e915cae087, type: 3}
   quantitymax: 1
-  isVisiable: 1
+  isCherry: 1
